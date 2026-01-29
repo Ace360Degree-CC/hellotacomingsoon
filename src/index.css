@@ -127,7 +127,11 @@
   }
 
   .card-elevated {
-    @apply bg-card rounded-xl p-6 md:p-8 shadow-card transition-shadow duration-300 hover:shadow-card-hover;
+    @apply bg-card rounded-xl p-6 md:p-8 shadow-card transition-shadow duration-300;
+  }
+  
+  .card-elevated:hover {
+    box-shadow: 0 8px 32px -4px rgba(15, 34, 87, 0.12);
   }
 
   .text-gradient {
