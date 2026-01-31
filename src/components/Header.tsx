@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, ChevronDown, Menu, X, FileText, Calculator, PieChart, BarChart3, ClipboardCheck, Palette, Presentation, Building, BookOpen, TrendingUp } from "lucide-react";
+import { Phone, ChevronDown, Menu, X, FileText, Calculator, PieChart, BarChart3, ClipboardCheck, Palette, Presentation, Building, BookOpen, TrendingUp, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const services = [
@@ -63,6 +63,12 @@ const services = [
     href: "/services/share-valuation",
     icon: TrendingUp,
     description: "Company valuation",
+  },
+  {
+    name: "Trademark Registration",
+    href: "/services/trademark-registration",
+    icon: Shield,
+    description: "Brand protection",
   },
 ];
 
