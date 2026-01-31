@@ -17,6 +17,7 @@ import PitchDeck from "./pages/services/PitchDeck";
 import ProjectReport from "./pages/services/ProjectReport";
 import ProvisionalBalanceSheet from "./pages/services/ProvisionalBalanceSheet";
 import ShareValuation from "./pages/services/ShareValuation";
+import TrademarkRegistration from "./pages/services/TrademarkRegistration";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/services/project-report" element={<ProjectReport />} />
           <Route path="/services/provisional-balance-sheet" element={<ProvisionalBalanceSheet />} />
           <Route path="/services/share-valuation" element={<ShareValuation />} />
+          <Route path="/services/trademark-registration" element={<TrademarkRegistration />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
