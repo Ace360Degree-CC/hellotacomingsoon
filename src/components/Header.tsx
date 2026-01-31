@@ -1,9 +1,42 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, ChevronDown, Menu, X, FileText, Calculator, PieChart, BarChart3, ClipboardCheck, Palette, Presentation, Building, BookOpen, TrendingUp, Shield } from "lucide-react";
+import { Phone, ChevronDown, Menu, X, FileText, Calculator, PieChart, BarChart3, ClipboardCheck, Palette, Presentation, Building, BookOpen, TrendingUp, Shield, Users, Handshake, User, Store, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const services = [
+const formationServices = [
+  {
+    name: "Private Limited Company",
+    href: "/services/private-limited",
+    icon: Building2,
+    description: "Investor-ready structure",
+  },
+  {
+    name: "LLP Registration",
+    href: "/services/llp-registration",
+    icon: Handshake,
+    description: "Limited liability partnership",
+  },
+  {
+    name: "OPC Registration",
+    href: "/services/opc-registration",
+    icon: User,
+    description: "One person company",
+  },
+  {
+    name: "Sole Proprietorship",
+    href: "/services/sole-proprietorship",
+    icon: Store,
+    description: "Single owner business",
+  },
+  {
+    name: "HUF Registration",
+    href: "/services/huf-registration",
+    icon: Users,
+    description: "Family tax planning",
+  },
+];
+
+const startupServices = [
   {
     name: "Board Resolution",
     href: "/services/board-resolution",
@@ -107,31 +140,64 @@ const Header = () => {
               {/* Dropdown Menu */}
               {isServicesOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
-                  <div className="bg-white rounded-xl shadow-lg border border-grey-divider p-4 min-w-[600px]">
-                    <div className="grid grid-cols-3 gap-3">
-                      {services.map((service) => {
-                        const Icon = service.icon;
-                        return (
-                          <Link
-                            key={service.href}
-                            to={service.href}
-                            className="flex items-start gap-3 p-3 rounded-lg hover:bg-grey-subtle transition-colors group"
-                            onClick={() => setIsServicesOpen(false)}
-                          >
-                            <div className="w-9 h-9 rounded-lg bg-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-colors">
-                              <Icon className="w-4 h-4 text-teal" />
-                            </div>
-                            <div>
-                              <p className="font-medium text-primary text-sm group-hover:text-teal transition-colors">
-                                {service.name}
-                              </p>
-                              <p className="text-xs text-text-body mt-0.5">
-                                {service.description}
-                              </p>
-                            </div>
-                          </Link>
-                        );
-                      })}
+                  <div className="bg-white rounded-xl shadow-lg border border-grey-divider p-6 min-w-[800px]">
+                    <div className="grid grid-cols-2 gap-8">
+                      {/* Formation Services */}
+                      <div>
+                        <h3 className="text-xs font-semibold text-text-body uppercase tracking-wider mb-3 px-3">Business Formation</h3>
+                        <div className="space-y-1">
+                          {formationServices.map((service) => {
+                            const Icon = service.icon;
+                            return (
+                              <Link
+                                key={service.href}
+                                to={service.href}
+                                className="flex items-center gap-3 p-3 rounded-lg hover:bg-grey-subtle transition-colors group"
+                                onClick={() => setIsServicesOpen(false)}
+                              >
+                                <div className="w-9 h-9 rounded-lg bg-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-colors">
+                                  <Icon className="w-4 h-4 text-teal" />
+                                </div>
+                                <div>
+                                  <p className="font-medium text-primary text-sm group-hover:text-teal transition-colors">
+                                    {service.name}
+                                  </p>
+                                  <p className="text-xs text-text-body">
+                                    {service.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                      
+                      {/* Startup Services */}
+                      <div>
+                        <h3 className="text-xs font-semibold text-text-body uppercase tracking-wider mb-3 px-3">Startup Services</h3>
+                        <div className="grid grid-cols-2 gap-1">
+                          {startupServices.map((service) => {
+                            const Icon = service.icon;
+                            return (
+                              <Link
+                                key={service.href}
+                                to={service.href}
+                                className="flex items-start gap-2 p-2 rounded-lg hover:bg-grey-subtle transition-colors group"
+                                onClick={() => setIsServicesOpen(false)}
+                              >
+                                <div className="w-7 h-7 rounded-md bg-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-colors">
+                                  <Icon className="w-3.5 h-3.5 text-teal" />
+                                </div>
+                                <div>
+                                  <p className="font-medium text-primary text-xs group-hover:text-teal transition-colors">
+                                    {service.name}
+                                  </p>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -178,9 +244,28 @@ const Header = () => {
           <div className="lg:hidden py-4 border-t border-grey-divider">
             <div className="space-y-4">
               <div>
-                <p className="text-sm font-semibold text-primary mb-3">Services</p>
+                <p className="text-sm font-semibold text-primary mb-3">Business Formation</p>
                 <div className="grid grid-cols-2 gap-2">
-                  {services.map((service) => {
+                  {formationServices.map((service) => {
+                    const Icon = service.icon;
+                    return (
+                      <Link
+                        key={service.href}
+                        to={service.href}
+                        className="flex items-center gap-2 p-2 rounded-lg hover:bg-grey-subtle transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <Icon className="w-4 h-4 text-teal" />
+                        <span className="text-sm text-text-body">{service.name}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-primary mb-3">Startup Services</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {startupServices.map((service) => {
                     const Icon = service.icon;
                     return (
                       <Link

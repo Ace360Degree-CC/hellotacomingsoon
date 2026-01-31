@@ -19,6 +19,13 @@ import ProvisionalBalanceSheet from "./pages/services/ProvisionalBalanceSheet";
 import ShareValuation from "./pages/services/ShareValuation";
 import TrademarkRegistration from "./pages/services/TrademarkRegistration";
 
+// Formation Pages
+import PrivateLimitedRegistration from "./pages/services/PrivateLimitedRegistration";
+import LLPRegistration from "./pages/services/LLPRegistration";
+import OPCRegistration from "./pages/services/OPCRegistration";
+import SoleProprietorship from "./pages/services/SoleProprietorship";
+import HUFRegistration from "./pages/services/HUFRegistration";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -42,6 +49,13 @@ const App = () => (
           <Route path="/services/provisional-balance-sheet" element={<ProvisionalBalanceSheet />} />
           <Route path="/services/share-valuation" element={<ShareValuation />} />
           <Route path="/services/trademark-registration" element={<TrademarkRegistration />} />
+          
+          {/* Formation Routes */}
+          <Route path="/services/private-limited" element={<PrivateLimitedRegistration />} />
+          <Route path="/services/llp-registration" element={<LLPRegistration />} />
+          <Route path="/services/opc-registration" element={<OPCRegistration />} />
+          <Route path="/services/sole-proprietorship" element={<SoleProprietorship />} />
+          <Route path="/services/huf-registration" element={<HUFRegistration />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
