@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import ComingSoon from "./pages/ComingSoon";
 
 // Service Pages
 import BoardResolution from "./pages/services/BoardResolution";
@@ -36,6 +37,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/coming-soon" element={<ComingSoon />} />
           
           {/* Service Routes */}
           <Route path="/services/board-resolution" element={<BoardResolution />} />
