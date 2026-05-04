@@ -1,11 +1,15 @@
 {
-  "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/coming-soon",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ]
 }
