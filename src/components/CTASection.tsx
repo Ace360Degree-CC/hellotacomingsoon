@@ -28,11 +28,12 @@ const CTASection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 border-t border-grey-divider">
             <div className="flex items-center gap-2 text-text-body">
               <Phone className="w-5 h-5 text-accent" />
-              <span>1800-XXX-XXXX (Toll Free)</span>
+              {/* <span>1800-XXX-XXXX (Toll Free)</span> */}
+              <span>+91 9876543210</span>
             </div>
             <div className="flex items-center gap-2 text-text-body">
               <MessageCircle className="w-5 h-5 text-accent" />
-              <span>WhatsApp: +91 98XXX XXXXX</span>
+              <span>WhatsApp: +91 9876543210</span>
             </div>
           </div>
         </div>

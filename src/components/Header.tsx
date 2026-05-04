@@ -219,7 +219,8 @@ const Header = () => {
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" className="hidden md:flex items-center gap-2">
               <Phone className="w-4 h-4" />
-              <span>1800-XXX-XXXX</span>
+              {/* <span>1800-XXX-XXXX</span> */}
+              <span>+91-9876543210</span>
             </Button>
             <Button variant="accent" size="sm" className="hidden sm:flex">
               Get Started
