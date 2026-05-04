@@ -68,11 +68,14 @@ import HUFRegistration from "./pages/services/HUFRegistration";
 //   </QueryClientProvider>
 // );
 
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Redirect root to coming-soon */}
+        <Route path="/" element={<Navigate to="/coming-soon" replace />} />
+
+        {/* Coming soon page */}
         <Route path="/coming-soon" element={<ComingSoon />} />
       </Routes>
     </BrowserRouter>
