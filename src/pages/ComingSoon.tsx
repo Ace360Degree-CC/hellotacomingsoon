@@ -3,6 +3,7 @@ import { Mail, Clock, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
+import logo from "@/assets/images/logo.png";
 
 const LAUNCH_DATE = new Date();
 LAUNCH_DATE.setDate(LAUNCH_DATE.getDate() + 30);
@@ -20,17 +21,57 @@ const calc = () => {
 const ComingSoon = () => {
   const [time, setTime] = useState(calc());
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setTime(calc()), 1000);
     return () => clearInterval(t);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    toast({ title: "You're on the list!", description: "We'll notify you the moment we launch." });
-    setEmail("");
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || "").trim()
+        || (import.meta.env.DEV ? "http://localhost:5000" : "");
+      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "Coming Soon Subscriber",
+          email,
+          subject: "Coming Soon Signup",
+          service: "Launch Waitlist",
+          message: "User subscribed from the Coming Soon page.",
+          source: "coming-soon-page",
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data?.message || "Failed to submit form");
+      }
+
+      toast({
+        title: "You're on the list!",
+        description: "Your request was submitted successfully.",
+      });
+      setEmail("");
+    } catch (error) {
+      let message = error instanceof Error ? error.message : "Something went wrong. Please try again.";
+      if (error instanceof TypeError) {
+        message = "Backend is not reachable. Start API server on http://localhost:5000.";
+      }
+      toast({
+        title: "Submission failed",
+        description: message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const units = [
@@ -49,11 +90,12 @@ const ComingSoon = () => {
 
       {/* Header */}
       <header className="relative z-10 px-6 md:px-12 py-6">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-            <span className="text-accent-foreground font-bold text-lg">H</span>
-          </div>
-          <span className="text-primary-foreground font-bold text-xl tracking-tight">HelloTax</span>
+        <div className="flex items-center">
+          <img
+            src={logo}
+            alt="HelloTax logo"
+            className="block h-9 md:h-11 w-auto max-w-none object-contain"
+          />
         </div>
       </header>
 
@@ -104,8 +146,12 @@ const ComingSoon = () => {
                   className="pl-11 h-12 bg-primary-foreground/10 sm:bg-transparent border-primary-foreground/20 sm:border-0 text-primary-foreground placeholder:text-primary-foreground/50 focus-visible:ring-accent"
                 />
               </div>
-              <Button type="submit" className="h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-6">
-                Notify Me
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-6 disabled:opacity-70"
+              >
+                {isSubmitting ? "Submitting..." : "Notify Me"}
                 <ArrowRight className="ml-1 w-4 h-4" />
               </Button>
             </div>
@@ -114,6 +160,16 @@ const ComingSoon = () => {
               Be the first to know when we go live
             </p>
           </form>
+
+          <div className="mt-8 text-sm text-primary-foreground/70 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+            <a href="mailto:hello@hellotaxindia.com" className="hover:text-primary-foreground transition-colors">
+              hello@hellotaxindia.com
+            </a>
+            <span className="hidden sm:inline text-primary-foreground/40">|</span>
+            <a href="tel:+919876543210" className="hover:text-primary-foreground transition-colors">
+              +91 9876543210
+            </a>
+          </div>
         </div>
       </main>
 
