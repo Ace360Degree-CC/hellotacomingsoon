@@ -28,8 +28,9 @@ function App() {
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<ComingSoon />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
+          <Route path="/home" element={<Index />} />
 
           <Route path="/services/private-limited" element={<PrivateLimitedRegistration />} />
           <Route path="/services/llp-registration" element={<LLPRegistration />} />
