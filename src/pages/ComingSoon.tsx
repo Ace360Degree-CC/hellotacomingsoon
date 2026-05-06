@@ -34,19 +34,19 @@ const ComingSoon = () => {
 
     setIsSubmitting(true);
     try {
-      const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || "").trim()
-        || (import.meta.env.DEV ? "http://localhost:5000" : "");
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+      const formData = {
+        name: "Coming Soon Subscriber",
+        email,
+        subject: "Coming Soon Signup",
+        service: "Launch Waitlist",
+        message: "User subscribed from the Coming Soon page.",
+        source: "coming-soon-page",
+      };
+
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: "Coming Soon Subscriber",
-          email,
-          subject: "Coming Soon Signup",
-          service: "Launch Waitlist",
-          message: "User subscribed from the Coming Soon page.",
-          source: "coming-soon-page",
-        }),
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json().catch(() => ({}));
@@ -62,7 +62,7 @@ const ComingSoon = () => {
     } catch (error) {
       let message = error instanceof Error ? error.message : "Something went wrong. Please try again.";
       if (error instanceof TypeError) {
-        message = "Backend is not reachable. Start API server on http://localhost:5000.";
+        message = "Backend is not reachable right now. Please try again.";
       }
       toast({
         title: "Submission failed",
